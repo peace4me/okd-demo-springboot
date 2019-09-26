@@ -1,5 +1,6 @@
 package com.example.springboot.demo;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 public class DemoApplication extends SpringBootServletInitializer {
+
+    @Value("${spring.profiles.active}")
+    private String activeEnviroment;
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -22,6 +26,6 @@ public class DemoApplication extends SpringBootServletInitializer {
 
     @RequestMapping("/")
     public String index() {
-        return "Greetings from Spring Boot!";
+        return "Env: " + activeEnviroment + " Greetings from Spring Boot!";
     }
 }
